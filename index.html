@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あおの歯科クリニック</title>
+    <meta name="description" content="当クリニックは患者さんに寄り添い、治療を行います。" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="icon.png" />
+    <style>
+      
+        body{
+           margin:0;
+       }
+         /*ハンバーガーメニュー*/
+         .menu-trigger,
+       .menu-trigger span {
+           display: inline-block;
+           transition: all .4s;
+           box-sizing: border-box;
+       }
+       .menu-trigger {
+           margin:9px;
+           z-index: 10000;
+           position: fixed;
+           width: 50px;
+           right: 0;
+           height: 44px;
+       }
+       .menu-trigger span {
+           position: absolute;
+           left: 0;
+           width: 100%;
+           height: 4px;
+           background-color:#6495ed;
+           border-radius: 4px;
+       }
+       .menu-trigger span:nth-of-type(1) {
+           top: 0;
+       }
+       .menu-trigger span:nth-of-type(2) {
+           top: 20px;
+       }
+       .menu-trigger span:nth-of-type(3) {
+           bottom: 0;
+       }
+       .menu-trigger.active span:nth-of-type(1) {
+           -webkit-transform: translateY(20px) rotate(-315deg);
+           transform: translateY(20px) rotate(-315deg);
+       }
+       .menu-trigger.active span:nth-of-type(2) {
+           opacity: 0;
+       }
+       .menu-trigger.active span:nth-of-type(3) {
+           -webkit-transform: translateY(-20px) rotate(315deg);
+           transform: translateY(-20px) rotate(315deg);
+       }
+       /*ハンバーガーメニュー終わり*/
+       .header-right-sp {
+           display:none;
+       }
+       /*👆ハンバーガーメニューを最初は表示させない*/
+       .ham-dis {
+           display: none;
+           transform: translateY(10px);
+           text-align: center;
+           position: fixed;
+           background-color: white;
+           height: 100%;
+           width: 100%;
+           top: -10px;
+           z-index: 9999;
+       }
+       .ham-dis ul {
+           padding: 0;
+           position: relative;
+           top: 4rem;
+           
+       }
+       .ham-dis li {
+           list-style-type: none;
+           border-top: 1px;
+           border-bottom: 1px ;
+           padding: 1rem 0;
+           font-size: large;
+           
+       }
+       .ham-dis a{
+           text-decoration: none;
+           color: black;
+       }
+       /*👆ハンバーガーメニュー内のテキストなどを装飾*/
+       .backshow{
+           display: block;
+       }
+       /*👆ハンバーガーメニューをクリックしたときにメニューを1回表示させる指定*/
+       .menu-list{
+           width: 100%;
+           color: black;
+           text-align: center;
+           background-color: black;
+       }
+       .list{
+           margin: 0;
+       }
+       .list li{
+           border-left: 1px solid white;
+           padding:10px 50px;
+           display: inline-block;
+       }
+       .list li a{
+           text-decoration: none;
+           color:white;
+       }
+       /*👇768px以下にした時にメニューバーを消し、ハンバーガーメニューを表示させる*/
+       @media screen and (max-width:768px){
+           .menu-list{
+               display: none;
+           }
+           .header-right-sp{
+               display: block;
+           }
+       }
+       .menu-list{
+           width: 100%;
+           color: black;
+           text-align: center;
+       }
+       
+       .list li{
+           border-left: 1px solid white;
+           padding:10px 50px;
+           display: inline-block;
+       }
+       .list{
+           margin:0;
+       }
+       .list li a{
+           text-decoration: none;
+           color:black;
+           font-size: large;
+       }
+       
+       a {
+position: relative; /*アンダーラインの位置を決めるための基準 */
+}
+
+a::after {
+position: absolute; /*親要素であるaタグを基準に位置を指定*/
+left: 0;            /*アンダーラインを各メニュー（aタグ）の左端に指定*/
+content: '';        /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
+width: 100%;        /*アンダーラインを各aタグの幅に合わせる*/
+height: 2px;        /*アンダーラインの高さ（太さ）*/
+background: #000000;/*アンダーラインの色*/
+}
+a::after {
+position: absolute;
+left: 0;
+content: '';
+width: 100%;
+height: 2px;
+background: white;
+bottom: -1px;
+transform: scale(0, 1);
+transform-origin: center top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の右端*/
+transition: transform 0.3s;   /*変形の時間*/
+}
+
+a:hover::after {
+transform: scale(1, 1); /*ホバー後、x軸方向に1（相対値）伸長*/
+}
+       .menu-list{
+           background-color: #add8e6; 
+       }
+       h1{
+        background-color: #add8e6;
+       }
+       a {
+position: relative; /*アンダーラインの位置を決めるための基準 */
+}
+
+a::after {
+position: absolute; /*親要素であるaタグを基準に位置を指定*/
+left: 0;            /*アンダーラインを各メニュー（aタグ）の左端に指定*/
+content: '';        /*本来は、擬似要素に入るテキストなどを’’内に指定。今回はアンダーラインなので何も記載しない*/
+width: 100%;        /*アンダーラインを各aタグの幅に合わせる*/
+height: 2px;        /*アンダーラインの高さ（太さ）*/
+background: #1e90ff;/*アンダーラインの色*/
+}
+a::after {
+position: absolute;
+left: 0;
+content: '';
+width: 100%;
+height: 2px;
+background: #1e90ff;
+bottom: -1px;
+transform: scale(0, 1);
+transform-origin: center top; /*変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の右端*/
+transition: transform 0.3s;   /*変形の時間*/
+}
+
+a:hover::after {
+transform: scale(1, 1); /*ホバー後、x軸方向に1（相対値）伸長*/
+}
+
+       .right-border{
+           border-right: 1px solid white;
+       }
+       
+   </style>
+   
+</head>
+<body> 
+   <div class="ham-dis">
+       <ul>
+           <li><a href="index.html">ホーム</a></li>
+           <li><a href="#">診察案内</a></li>
+           <li><a href="#">スタッフ紹介</a></li>
+           <li><a href="#">アクセス</a></li>
+           <li><a href="#">よくある質問</a></li>
+       </ul>
+   </div>
+   <nav class="menu-list">
+    <style>
+      h1{
+        color: #1e90ff;
+      }
+    </style>
+    <img src="logo.png">
+    <h1>あおの歯科クリニック</h1>
+       <ul class="list">
+           <li><a href="index.html">ホーム</a></li>
+           <li><a href="#">診察案内</a></li>
+           <li><a href="#">スタッフ紹介</a></li>
+           <li><a href="#">アクセス</a></li>
+           <li class="right-border"><a href="#">よくある質問</a></li>
+       </ul>
+   </nav>
+   <div class="header-right-sp">
+       <a class="menu-trigger" href="#">
+           <span></span>
+           <span></span>
+           <span></span>
+       </a>
+   </div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>   
+   <script>
+       $(".menu-trigger").on('click', function(event) {
+           $(this).toggleClass("active");/*👈ハンバーガーメニューのアニメーションを実装させているactiveクラスを切り替え*/
+           $(".ham-dis").toggleClass("backshow");/*👈ハンバーガーメニューをクリックしてON、OFFを切り替える*/
+           
+       });
+   </script>     
+       </ul>
+   </nav>
+
+   
+   <!-- メインコンテンツ -->
+   <main>
+    <div class="css-carousel-slider3">
+      <div class="slide-wrap-main">
+          <div class="slide"><img src="suraido.jpg" alt=""></div>
+      </div>
+      <div class="slide-wrap">
+          <div class="slide"><img src="suraido.jpg" alt=""></div>
+          <div class="slide"><img src="suraido2.jpg" alt=""></div>
+          <div class="slide"><img src="suraido3.jpg" alt=""></div>
+      </div>
+  </div>
+   <p><span class="marker-stripe">当クリニックは<br>
+    患者さんやファミリーが安心して<br>
+  通っていただける歯科医院です。</span></p>
+
+
+  </div><!-- カードレイアウトをラッピング -->
+  <section class="news">
+        <div class="inner">
+          <h2 class="sub_ttl">NEWS</h2>
+    
+    <!-- ここからニュース記事 -->
+    
+          <ul class="news_list">
+              <li class="news_list_item">
+                <a href="">
+                  <div class="news_list_date">
+                    <time>2025.0.00</time>
+                    <p class="news_item">お知らせ</p>
+                  </div>
+                  <p>記事を更新しました。</p>
+                  <span class="arrow"></span>
+                </a>
+              </li>
+              <li class="news_list_item">
+                <a href="">
+                  <div class="news_list_date">
+                    <time>2025.0.00</time>
+                    <p class="news_item">お知らせ</p>
+                  </div>
+                  <p>予防治療のお知らせ</p>
+                  <span class="arrow"></span>
+                </a>
+              </li>
+              <li class="news_list_item">
+                <a href="">
+                  <div class="news_list_date">
+                    <time>2025.0.00</time>
+                    <p class="news_item">お知らせ</p>
+                  </div>
+                  <p>オンラインでご相談が出来るようになりました。</p>
+                  <span class="arrow"></span>
+                </a>
+              </li>
+        </ul>
+    
+    
+        </div>
+
+</section>
+<h2>診察案内</h2>
+<style>
+  /* カードレイアウト部分をラッピングし、
+Flexboxを指定"space-between"で各アイテムを均等に配置し、
+最初と最後のアイテムを端に寄せます。*/
+#cardlayout-wrap {
+position: relative;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-pack: justify;
+margin: 2em auto;
+max-width: 768px;
+width: 100%;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+-webkit-box-pack: justify;
+justify-content: space-between;
+}
+
+/* リンクテキストの下線を非表示 */
+a.card-link {
+text-decoration: none;
+}
+
+/* カードレイアウト内の画像を幅いっぱいに表示 */
+#cardlayout-wrap img {
+display: block;
+max-width: 100%;
+height: auto;
+}
+
+.card-figure {
+margin: 0;
+padding: 0;
+}
+
+/* カードレイアウトのタイトル部分 */
+.card-title {
+margin: 0.6em 0 0;
+color: #333;
+text-align: center;
+font-size: 1.8em;
+}
+
+/* カードレイアウトの説明文部分 */
+.card-text-tax {
+margin: 0;
+padding: 1em;
+color: #818181;
+}
+
+
+/* カードレイアウトを1カラムで配置 */
+.card-list {
+margin: 0.5em auto;
+padding: 0;
+width: 100%;
+background: #f0f0f0;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 画面幅768px以上の場合カードレイアウトを2カラムで配置 */
+@media all and (min-width: 768px) {
+.card-list {
+    margin: 0.5em 0;
+    width: calc(100% / 2); /* 100%幅を2で割るという指定 */
+}
+}
+
+/* 画面幅992px以上の場合カードレイアウトを3カラムで配置 */
+@media all and (min-width: 992px) {
+.card-list {
+    width: calc(100% / 3); /* 100%幅を3で割るという指定 */
+}
+
+/* 最後の行が3列より少ない場合左寄せにレイアウトさせる */
+#cardlayout-wrap::after{
+    content: "";
+    display: block;
+    width: calc(100% / 3);
+}
+}
+/* カードレイアウト部分をラッピングし、
+Flexboxを指定"space-between"で各アイテムを均等に配置し、
+最初と最後のアイテムを端に寄せます。*/
+#cardlayout-wrap {
+position: relative;
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-ms-flex-pack: justify;
+margin: 2em auto;
+max-width: 960px;
+width: 100%;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+-webkit-box-pack: justify;
+justify-content: space-between;
+}
+
+/* リンクテキストの下線を非表示 */
+a.card-link {
+text-decoration: none;
+}
+
+/* カードレイアウト内の画像を幅いっぱいに表示 */
+#cardlayout-wrap img {
+display: block;
+max-width: 30%;
+height: auto;
+}
+
+.card-figure {
+margin: 0;
+padding: 0;
+}
+
+/* カードレイアウトのタイトル部分 */
+.card-title {
+margin: 0.6em 0 0;
+color: black;
+text-align: center;
+font-size: 1.8em;
+}
+
+/* カードレイアウトの説明文部分 */
+.card-text-tax {
+margin: 0;
+padding: 1em;
+color: #818181;
+}
+
+/* カードレイアウトを1カラムで配置 */
+.card-list {
+margin: 0.5em auto;
+padding: 0;
+width: 96%;
+background: white;
+box-shadow: 4px 8px #b0e0e6;
+}
+
+/* 画面幅768px以上の場合カードレイアウトを2カラムで配置 */
+@media all and (min-width: 768px) {
+.card-list {
+    margin: 0.5em 0;
+    width: calc(96% / 2); /* 96%幅を2で割るという指定 */
+}
+}
+
+/* 画面幅768px以上の場合カードレイアウトを4カラムで配置 */
+@media all and (min-width: 768px) {
+.card-list {
+    width: calc(96% / 3); /* 96%幅を3で割るという指定 */
+}
+
+/* 最後の行が4列より少ない場合左寄せにレイアウトさせる */
+#cardlayout-wrap::after{
+    content: "";
+    display: block;
+    width: calc(96% / 3);
+}
+}
+
+</style>
+<div id="cardlayout-wrap"><!-- カードレイアウトをラッピング -->
+  <section class="card-list">
+      <a class="card-link" href="#">
+          <figure class="card-figure"><center><img src="sika.png"></center></figure>
+          <h2 class="card-title">予防歯科</h2>
+
+          <p class="card-text-tax"><font color="gray">健康な口腔を維持</font></p>
+      </a>
+  </section>
+  <section class="card-list">
+      <a class="card-link" href="#">
+          <figure class="card-figure"><center><img src="sika2.png"></center></figure>
+          <h2 class="card-title">歯を削らない歯科</h2>
+
+          <p class="card-text-tax"><font color="gray">歯を傷めない治療</font></p>
+      </a>
+  </section>
+  <section class="card-list">
+      <a class="card-link" href="#">
+          <figure class="card-figure"><center><img src="sika3.png"></center></figure>
+          <h2 class="card-title">大人の治療</h2>
+          <p class="card-text-tax"><font color="gray">インプラント治療</font></p>
+
+      </a>
+  </section>
+
+   </main>
+           <!-- フッター -->
+           <footer>
+            <footer class="footer">
+                <div class="footer-section-top lg-flex md-justify-between">
+                  <address class="footer-address">
+                    <h2>あおの歯科クリニック</h2>
+                    <font color="black">〒163-8001 東京都新宿区西新宿２丁目８−１</font><br />
+                    <font color="black">TEL：</font><a href="tel:" class="footer-address__tel">0120-123-456</a>
+                  </address>
+                  <table class="footer-table">
+                    <tbody>
+                      <tr>
+                        <th>診療時間</th>
+                        <th>月</th>
+                        <th>火</th>
+                        <th>水</th>
+                        <th>木</th>
+                        <th>金</th>
+                        <th>土</th>
+                        <th>日・祝</th>
+                      </tr>
+                      <tr>
+                        <th class="th2">9:00 - 12:00</th>
+                        <td>
+                          <span class="maru"></span>
+                        </td>
+                        <td>
+                          <span class="maru"></span>
+                        </td>
+                        <td>休診</td>
+                        <td>
+                          <span class="maru"></span>
+                        </td>
+                        <td>
+                          <span class="maru"></span>
+                        </td>
+                        <td>
+                          <span class="maru"></span>
+                        </td>
+                        <td>休診</td>
+                      </tr>
+                      <tr>
+                        <th class="th2">14:00 - 19:00</th>
+                        <td><span class="maru"></span></td>
+                        <td><span class="maru"></span></td>
+                        <td>休診</td>
+                        <td><span class="maru"></span></td>
+                        <td><span class="maru"></span></td>
+                        <td>休診</td>
+                        <td>休診</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207346.86179271416!2d139.26258098816177!3d35.70666899685324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f1!3m3!1m2!1s0x60188cd4b71a37a1%3A0xf1665c37f38661e8!2z5p2x5Lqs6YO95bqB!5e0!3m2!1sja!2sjp!4v1673401451531!5m2!1sja!2sjp" class="footer-map" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="footer-section-bottom grid">
+                  <div>
+                    <p class="footer-navi-heading">一般歯科</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">歯が痛い・しみるなどの虫歯のトラブルは早めに治療しましょう。</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="footer-navi-heading">小児歯科</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">お子様の歯に異常を感じたら、<br>
+                         お早めにご相談ください。</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="footer-navi-heading">予防歯科</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">いつまでも健康な歯を保つために、<br>
+                         定期的なメンテナンスが大切です</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="footer-navi-heading">weldenz</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">健康な歯を削らない最新の治療法 「ウェルデンツ」<br>
+                        を導入しています<br>
+                        お手入れも簡単です。</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="footer-navi-heading">ブリッジ</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">快適で身体に優しいブリッジを<br>
+                        ご提案いたします</a></li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <p class="footer-navi-heading">入れ歯</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">補綴物によって補い、<br>
+                        見た目と機能を回復する治療を行います</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="footer-navi-heading">矯正歯科</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">歯並びを綺麗に治し、<br>
+                        全身と噛み合わせのバランスを調整します。</a></li>
+                    </ul>
+                  </div>
+
+
+                  <div>
+                    <p class="footer-navi-heading">ホワイトニング</p>
+                    <ul class="footer-navi">
+                      <li><a href="#">歯を削らずに専用の薬剤を使って白くする、<br>
+                        歯に優しい治療です。</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <style>
+                  @import "https://use.fontawesome.com/releases/v5.13.0/css/all.css";
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+.btn,
+a.btn,
+button.btn {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #212529;
+  border-radius: 0.5rem;
+}
+
+.btn-wrap-pc-sp {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  max-width: 435px;
+  margin: 0 auto 20px;
+
+  -webkit-box-pack: justify;
+
+  -ms-flex-pack: justify;
+
+  justify-content: space-between;
+}
+
+a.btn-pc-sp {
+  line-height: 1.4;
+
+  width: 49.5%;
+  padding: 1.25rem 0;
+
+  border-radius: 100vh;
+
+  color: #ffff;
+}
+
+a.btn-pc-sp--contact {
+  color: #fff;
+  background: lightpink;
+}
+
+a.btn-pc-sp--tel {
+  color: #fff;
+  background: lightblue;
+}
+
+.fa-position-right {
+  position: absolute;
+  top: calc(50% - 0.5em);
+  right: 1rem;
+}
+                </style>
+                <div class="btn-wrap btn-wrap-pc-sp">
+                  <a href="" class="btn btn-pc-sp btn-pc-sp--3 btn-pc-sp--contact">
+                    お問い合せ
+                    <i class="fas fa-angle-right fa-position-right"></i>
+                  </a>
+                  <a href="" class="btn btn-pc-sp btn-pc-sp--3 btn-pc-sp--tel">
+                    電話をする
+                    <i class="fas fa-angle-right fa-position-right"></i>
+                  </a>
+                </div>
+    
+   <footer class="footer">
+    <div class="md-flex md-justify-between">
+      </a>
+      <div class="grid">
+        <div>
+          <ul class="footer__navi">
+          </ul>
+    <div class="md-flex md-justify-between">
+      </p>
+      <div class="footer__social">
+        <a href="#">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</footer>
+</footer>
+<div class="ham-dis">
+  <ul>
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="#">診察案内</a></li>
+      <li><a href="#">スタッフ紹介</a></li>
+      <li><a href="#">アクセス</a></li>
+      <li><a href="#">よくある質問</a></li>
+  </ul>
+</div>
+<nav class="menu-list">
+  <ul class="list">
+      <li><a href="index.html">ホーム</a></li>
+      <li><a href="#">診察案内</a></li>
+      <li><a href="#">スタッフ紹介</a></li>
+      <li><a href="#">アクセス</a></li>
+      <li class="right-border"><a href="#">よくある質問</a></li>
+  </ul>
+</nav>
+<div class="header-right-sp">
+  <a class="menu-trigger" href="#">
+      <span></span>
+      <span></span>
+      <span></span>
+  </a>
+</div>
+<p class="footer-copyright">
+  © 2025 To Dental Clinic.</a> All Rights Reserved.
+</p>
